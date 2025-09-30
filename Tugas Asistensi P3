@@ -1,34 +1,44 @@
 #include <stdio.h>
-void decimalToBinary(int n) {
-    int biner[32]; 
+void binary(int n) {
+    int biner[32];
     int i = 0;
     if (n == 0) {
-        printf("0");
+        printf("0000");
         return;
     }
     while (n > 0) {
-        biner[i] = n % 2;  
-        n = n / 2;         
+        biner[i] = n % 2;
+        n = n / 2;
+        i++;
+    }
+    while (i % 4 != 0) {
+        biner[i] = 0;
         i++;
     }
     for (int j = i - 1; j >= 0; j--) {
         printf("%d", biner[j]);
+        if (j % 4 == 0 && j != 0) {
+            printf(" ");
+        }
     }
 }
-void cekGenapGanjil(int n) {
+void cekGG(int n) {
     if (n % 2 == 0) {
-        printf("Bilangan ini GENAP\n");
+        printf("Bilangan bulat ini GENAP\n");
     } else {
-        printf("Bilangan ini GANJIL\n");
+        printf("Bilangan bulat ini GANJIL\n");
     }
 }
 int main() {
+    float desimalF;
     int desimal;
     printf("Masukkan bilangan desimal: ");
-    scanf("%d", &desimal);
+    scanf("%f", &desimalF);
+    desimal = (int)desimalF;
+    printf("Bagian bulat dari %.2f adalah %d\n", desimalF, desimal);
     printf("Biner dari %d adalah: ", desimal);
-    decimalToBinary(desimal);
+    binary(desimal);
     printf("\n");
-    cekGenapGanjil(desimal);
+    cekGG(desimal);
     return 0;
 }
